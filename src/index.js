@@ -9,11 +9,14 @@ import { takeEvery, put } from 'redux-saga/effects'
 import createSagaMiddleware from 'redux-saga';
 
 const categoryReducer = (state = [], action) => {
-
+    if(action.type==='FETCH_GIF') {
+        return action.payload
+    }
+    return state
 }
 
 const favoriteReducer = (state = [], action) => {
-
+    return state
 }
 
 const imageReducer = (state = [], action) => {
@@ -27,9 +30,14 @@ const imageReducer = (state = [], action) => {
 
 function* fetchGif(searchTerm) {
     try{
+<<<<<<< HEAD
     const searchText = searchTerm.payload.searchValue;
     yield console.log('in fetch Gif', searchTerm.payload);
     const imageResponse = yield axios.get(`/api/category/${searchText}`)
+=======
+    yield console.log('in fetch Gif', searchTerm.payload);
+    const imageResponse = yield axios.get(`/api/category/request/${searchTerm.payload}`)
+>>>>>>> 55bd33961e1ee8faef9590558829e607c79706c9
     yield put({ type: 'SET_GIF', payload: imageResponse.data})
     } catch (err) {
         console.log(err);
@@ -40,7 +48,7 @@ const sagaMiddleware = createSagaMiddleware();
 
 function* watcherSaga() {
     yield takeEvery('FETCH_GIF', fetchGif)
-    yield takeEvery('ADD_GIF', addGif)
+    // yield takeEvery('ADD_GIF', addGif)
 }
 
 // createStore
@@ -50,9 +58,10 @@ const storeInstance = createStore(
         categoryReducer,
         imageReducer,
         favoriteReducer
-    })
+    }),
+    applyMiddleware(sagaMiddleware, logger),
 )
 
-// sagaMiddleware.run('');
+sagaMiddleware.run(watcherSaga);
 
 ReactDOM.render(<Provider store={storeInstance}><App /></Provider>, document.getElementById('root'));
