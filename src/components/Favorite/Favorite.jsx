@@ -4,7 +4,10 @@ import axios from 'axios';
 
 function Favorite(){
     return (
+        <>
 
+
+        </>
 
 
     );
