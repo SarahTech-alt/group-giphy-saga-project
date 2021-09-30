@@ -30,14 +30,9 @@ const imageReducer = (state = [], action) => {
 
 function* fetchGif(searchTerm) {
     try{
-<<<<<<< HEAD
     const searchText = searchTerm.payload.searchValue;
     yield console.log('in fetch Gif', searchTerm.payload);
     const imageResponse = yield axios.get(`/api/category/${searchText}`)
-=======
-    yield console.log('in fetch Gif', searchTerm.payload);
-    const imageResponse = yield axios.get(`/api/category/request/${searchTerm.payload}`)
->>>>>>> 55bd33961e1ee8faef9590558829e607c79706c9
     yield put({ type: 'SET_GIF', payload: imageResponse.data})
     } catch (err) {
         console.log(err);
