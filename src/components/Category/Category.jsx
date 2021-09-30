@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 
@@ -8,20 +8,29 @@ function Category() {
     //local state 
     const [searchValue, setSearchValue] = useState('');
 
-    const handleForSearch = (event) => {
-        console.log('event happened', event.target.value);
-        setSearchValue()
+
+    const newSearch = event => {
+        event.preventDefault();
+        console.log(searchValue)
+        dispatch({type: 'FETCH_GIF', payload: searchValue})
+        setSearchValue('');
+    }
+
+    const handleFavorite = () => {
+        dispatch({
+            type: 'SET_FAVORITE'
+        })
     }
 
     return (
         <>
-            <form onSubmit={newSearch}>
+            <form onSubmit={(event) => newSearch(event)}>
                 <input type='text'
-                    value={search}
+                    value={searchValue}
                     onChange={(event) => setSearchValue(event.target.value)} />
                 <input type='submit' value='Search' />
             </form>
-
+            <button onClick={handleFavorite}>Add Favorite</button>
         </>
     );
 }
