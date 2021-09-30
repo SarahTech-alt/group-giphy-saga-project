@@ -17,4 +17,14 @@ router.get('/', (req, res) => {
     });
 });
 
+router.get('/request/:searchTerm', (req, res) => {
+  const searchTerm = req.params.searchTerm;
+  axios.get(`https://api.giphy.com/v1/gifs/random?api_key=${process.env.GIPHY_API_KEY}&tag=&rating=g/search${searchTerm}`)
+      .then(response => {
+          res.send(response.data);
+      }).catch( error => {
+          res.sendStatus(500);
+      })
+});
+
 module.exports = router;
