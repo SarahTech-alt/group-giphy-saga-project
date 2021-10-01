@@ -21,7 +21,7 @@ const favoriteReducer = (state = [], action) => {
 
 const imageReducer = (state = [], action) => {
     if(action.type==='SET_GIF') {
-        return action.payload
+        return [... state, action.payload]
     }
     return state;
 }

@@ -22,7 +22,6 @@ function Category() {
     const handleFavorite = () => {
         dispatch({
             type: 'SET_FAVORITE',
-            data:
         })
     }
 
@@ -40,7 +39,10 @@ function Category() {
 
             <button onClick={handleFavorite}>Add Favorite</button>
                 <h1>Results:</h1>
-                {JSON.stringify(reduxState)}
+                {/* {JSON.stringify(reduxState)} */}
+                {reduxState.map(gif => (
+                <img src={gif.data.images.downsized_medium.url}/>
+                ))} 
         </>
     );
 }
