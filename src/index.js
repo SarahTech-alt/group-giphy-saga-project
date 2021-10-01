@@ -43,6 +43,7 @@ const sagaMiddleware = createSagaMiddleware();
 function* watcherSaga() {
     yield takeEvery('FETCH_GIF', fetchGif)
     // yield takeEvery('ADD_GIF', addGif)
+    // yield takeEvery('SET_FAVORITE' setFavorite)
 }
 
 // createStore
