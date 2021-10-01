@@ -15,13 +15,15 @@ function Category() {
     const newSearch = event => {
         event.preventDefault();
         console.log(searchValue)
-        dispatch({type: 'FETCH_GIF', payload: searchValue})
+        dispatch({ type: 'FETCH_GIF', payload: searchValue })
         setSearchValue('');
     }
 
-    const handleFavorite = () => {
+    const handleFavorite = (url) => {
+        console.log('in pic', url)
         dispatch({
             type: 'SET_FAVORITE',
+            payload: url
         })
     }
 
@@ -38,11 +40,15 @@ function Category() {
             </ul>
 
             <button onClick={handleFavorite}>Add Favorite</button>
-                <h1>Results:</h1>
-                {/* {JSON.stringify(reduxState)} */}
-                {reduxState.map(gif => (
-                <img src={gif.data.images.downsized_medium.url}/>
-                ))} 
+            <h1>Results:</h1>
+            {/* {JSON.stringify(reduxState)} */}
+            {reduxState.map((gif, i) => (<ul>
+                <li key={i}>
+                    <img src={gif.data.images.downsized_medium.url} />
+                    <button onClick={(event) => handleFavorite(gif.data.images.downsized_medium.url)}>Favorite</button>
+                </li>
+            </ul>
+            ))}
         </>
     );
 }
