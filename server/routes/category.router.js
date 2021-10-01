@@ -1,6 +1,8 @@
 const express = require('express');
 const pool = require('../modules/pool');
+require('dotenv').config()
 const axios = require('axios');
+
 
 const router = express.Router();
 

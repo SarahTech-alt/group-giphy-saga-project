@@ -8,6 +8,9 @@ function Category() {
     //local state 
     const [searchValue, setSearchValue] = useState('');
 
+    //results from server.
+    const reduxState = useSelector(store => store.imageReducer);
+
 
     const newSearch = event => {
         event.preventDefault();
@@ -18,7 +21,8 @@ function Category() {
 
     const handleFavorite = () => {
         dispatch({
-            type: 'SET_FAVORITE'
+            type: 'SET_FAVORITE',
+            data:
         })
     }
 
@@ -30,7 +34,13 @@ function Category() {
                     onChange={(event) => setSearchValue(event.target.value)} />
                 <input type='submit' value='Search' />
             </form>
+            <ul>
+                {/* Future map location */}
+            </ul>
+
             <button onClick={handleFavorite}>Add Favorite</button>
+                <h1>Results:</h1>
+                {JSON.stringify(reduxState)}
         </>
     );
 }
